@@ -57,6 +57,7 @@ public class Vector {
         return startPoint;
     }
 
+
     public void setStartPoint(Point startPoint){
         this.startPoint = startPoint;
     }
