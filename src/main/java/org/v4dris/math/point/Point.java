@@ -27,4 +27,8 @@ public class Point {
     public void setName(String name) {
         this.name = name;
     }
+
+    public static Point2D convertPoint(Point3D point){
+        return new Point2D(point.getX() + point.getY()/2, point.getZ() + point.getY()/2);
+    }
 }

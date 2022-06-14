@@ -34,8 +34,8 @@ public class Vector {
     public void mul(Matrix matrix) throws Exception {
         for(int i = 0; i < matrix.getSizeA(); i++){
             double v = 0;
-            for(int j = 0; j < matrix.getSizeB(); i++){
-                v = this.values[j] * matrix.values[i][j];
+            for(int j = 0; j < matrix.getSizeB(); j++){
+                v += this.values[j] * matrix.values[i][j];
             }
             this.values[i] = v;
         }

@@ -6,9 +6,9 @@ public class Matrix {
     public Matrix(double[]... values){
         this.values = new double[values.length][values[1].length];
         for(int i = 0; i < values.length; i++){
-            this.values[i][0] = values[i][0];
-            this.values[i][1] = values[i][1];
-            this.values[i][2] = values[i][2];
+            for(int j = 0; j < values[0].length; j++){
+                this.values[i][j] = values[i][j];
+            }
         }
     }
     public int getSizeA(){

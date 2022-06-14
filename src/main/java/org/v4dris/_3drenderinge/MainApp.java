@@ -10,6 +10,7 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 import org.v4dris.math.point.Point2D;
 import org.v4dris.math.vector.Vector2D;
+import org.v4dris.math.vector.Vector3D;
 
 import java.io.IOException;
 
@@ -35,6 +36,10 @@ public class MainApp extends Application {
         Scene scene = new Scene(root, screenBounds.getMaxX(), screenBounds.getMaxY() - 72);
         stage.setScene(scene);
         stage.show();
+    }
+
+    public void draw(Vector3D vector){
+        
     }
 
     public static void main(String[] args) {
