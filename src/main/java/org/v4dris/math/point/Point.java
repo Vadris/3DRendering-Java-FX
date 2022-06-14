@@ -29,6 +29,7 @@ public class Point {
     }
 
     public static Point2D convertPoint(Point3D point, double offsetX, double offsetY){
-        return new Point2D(point.getX() + point.getY()/2 + offsetX, point.getZ() - point.getY()/2 + offsetY);
+        double rt = 2 * Math.sqrt(2);
+        return new Point2D(point.getX() + point.getY()/rt + offsetX, point.getZ() - point.getY()/rt + offsetY);
     }
 }
