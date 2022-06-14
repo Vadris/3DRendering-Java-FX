@@ -10,7 +10,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="3DRenderinge" target="18" />
+      <module name="3DRenderinge" target="16" />
     </bytecodeTargetLevel>
   </component>
 </project>
