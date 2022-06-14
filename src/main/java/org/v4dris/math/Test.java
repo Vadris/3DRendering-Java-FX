@@ -8,7 +8,12 @@ public class Test {
         Point2D p1 = new Point2D(200, 500);
         Point2D p2 = new Point2D(400, 400);
 
-        Vector vec1 = new Vector2D(p1);
-        Vector vec2 = new Vector2D(p1, p2);
+        Vector2D vec1 = new Vector2D(p1);
+        Vector2D vec2 = new Vector2D(p1, p2);
+        System.out.println(vec1.getX());
+        System.out.println(vec1.getY());
+        System.out.println(vec2.getX());
+        System.out.println(vec2.getY());
+        System.out.println(vec2.getStartPoint());
     }
 }

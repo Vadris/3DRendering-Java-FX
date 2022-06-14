@@ -15,7 +15,12 @@ public class Vector2D extends Vector {
     public Vector2D(Point2D startPoint, Point2D endPoint){
         this.startPoint = new Point2D(startPoint.getName(), startPoint.getX(), startPoint.getY());
         this.values = new double[]{endPoint.getX() - startPoint.getX(), endPoint.getY() - startPoint.getY()};
+    }
 
-
+    public double getX(){
+        return values[0];
+    }
+    public double getY(){
+        return values[1];
     }
 }
