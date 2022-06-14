@@ -19,15 +19,22 @@ import java.io.IOException;
 public class MainApp extends Application {
     @Override
     public void start(Stage stage) throws IOException {
+        Rectangle2D screenBounds = Screen.getPrimary().getBounds();
         double size = 100;
+
         Point3D p1 = new Point3D(0,0,0);
         Point3D p2 = new Point3D(size,0,0);
         Point3D p3 = new Point3D(size,size,0);
         Point3D p4 = new Point3D(0,size,0);
 
+        Point3D p5 = new Point3D(0,0,-size);
+        Point3D p6 = new Point3D(size,0,-size);
+        Point3D p7 = new Point3D(size,size,-size);
 
-        Group root = new Group(createLine(new Vector3D(p1, p2))/**, createLine(new Vector3D(p2, p3)), createLine(new Vector3D(p3, p4))**/);
-        Rectangle2D screenBounds = Screen.getPrimary().getBounds();
+
+
+        Group root = new Group(createLine(new Vector3D(p1, p2)), createLine(new Vector3D(p2, p3)), createLine(new Vector3D(p3, p4)), createLine(new Vector3D(p4,p1)), createLine(new Vector3D(p1, p5)), createLine(new Vector3D(p2, p6)), createLine(new Vector3D(p5, p6)), createLine(new Vector3D(p3, p7)));
+
 
         Scene scene = new Scene(root, screenBounds.getMaxX(), screenBounds.getMaxY() - 72);
         stage.setScene(scene);
@@ -35,11 +42,12 @@ public class MainApp extends Application {
     }
 
     public Line createLine(Vector3D vector){
+        Rectangle2D screenBounds = Screen.getPrimary().getBounds();
         Line line = new Line();
 
-        Point3D tempPoint = (Point3D) vector.getEndPoint();
-        Point2D pointA = Point.convertPoint(tempPoint);
-        Point2D pointB = Point.convertPoint(vector.getEndPoint());
+        Point3D tempPoint = (Point3D) vector.getStartPoint();
+        Point2D pointA = Point.convertPoint(tempPoint, screenBounds.getMaxX()/2, screenBounds.getMaxY()/2);
+        Point2D pointB = Point.convertPoint(vector.getEndPoint(), screenBounds.getMaxX()/2, screenBounds.getMaxY()/2);
         line.setStartX(pointA.getX());
         line.setStartY(pointA.getY());
         line.setEndX(pointB.getX());
