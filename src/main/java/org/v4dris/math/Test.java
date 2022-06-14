@@ -10,6 +10,7 @@ public class Test {
 
         Vector2D vec1 = new Vector2D(p1);
         Vector2D vec2 = new Vector2D(p1, p2);
+        
         System.out.println(vec1.getX());
         System.out.println(vec1.getY());
         System.out.println(vec2.getX());
