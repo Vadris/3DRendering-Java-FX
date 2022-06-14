@@ -23,7 +23,15 @@ public class Vector {
         }
     }
 
+
     public int getSize(){
         return this.values.length;
+    }
+    public Point getStartPoint() {
+        return startPoint;
+    }
+
+    public void setStartPoint(Point startPoint){
+        this.startPoint = startPoint;
     }
 }
