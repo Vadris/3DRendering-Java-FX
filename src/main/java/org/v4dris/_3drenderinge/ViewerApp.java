@@ -1,7 +1,6 @@
 package org.v4dris._3drenderinge;
 
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -11,12 +10,11 @@ import javafx.stage.Stage;
 import org.v4dris.math.point.Point;
 import org.v4dris.math.point.Point2D;
 import org.v4dris.math.point.Point3D;
-import org.v4dris.math.vector.Vector2D;
 import org.v4dris.math.vector.Vector3D;
 
 import java.io.IOException;
 
-public class MainApp extends Application {
+public class ViewerApp extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         Rectangle2D screenBounds = Screen.getPrimary().getBounds();
