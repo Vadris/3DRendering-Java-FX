@@ -1,11 +1,11 @@
 package org.v4dris.math.point;
 
 public class Point3D extends Point{
-    protected Point3D(String name, double x, double y, double z) {
+    public Point3D(String name, double x, double y, double z) {
         super(name);
         coordinates = new double[]{x,y,z};
     }
-    protected Point3D(double x, double y, double z) {
+    public Point3D(double x, double y, double z) {
         super("P");
         coordinates = new double[]{x,y,z};
     }
