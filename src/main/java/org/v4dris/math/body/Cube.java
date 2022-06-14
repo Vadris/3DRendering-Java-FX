@@ -33,7 +33,5 @@ public class Cube extends Body3D{
                 new Vector3D(c, g),
                 new Vector3D(h, d)
         };
-
-
     }
 }
