@@ -2,6 +2,7 @@
   <library name="Maven: org.openjfx:javafx-base:win:18-ea+2">
     <CLASSES>
       <root url="jar://$MAVEN_REPOSITORY$/org/openjfx/javafx-base/18-ea+2/javafx-base-18-ea+2-win.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../JavaLibs/javafx-sdk-18.0.1/lib/javafx.base.jar!/" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$MAVEN_REPOSITORY$/org/openjfx/javafx-base/18-ea+2/javafx-base-18-ea+2-javadoc.jar!/" />

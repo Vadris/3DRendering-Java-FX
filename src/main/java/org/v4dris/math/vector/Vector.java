@@ -32,14 +32,17 @@ public class Vector {
         }
     }
     public void mul(Matrix matrix) throws Exception {
+        double[] v = new double[this.values.length];
         for(int i = 0; i < matrix.getSizeA(); i++){
-            double v = 0;
             for(int j = 0; j < matrix.getSizeB(); j++){
-                v += this.values[j] * matrix.values[i][j];
+                v[i] += this.values[j] * matrix.values[i][j];
             }
-            this.values[i] = v;
+        }
+        for(int i = 0; i < v.length; i++){
+            values[i] = v[i];
         }
     }
+
     public void div(Vector vector) throws Exception {
         if(getSize() != vector.getSize()) {
             throw new Exception("Vectors must be same size");
