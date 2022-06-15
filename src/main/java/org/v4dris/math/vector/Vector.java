@@ -3,6 +3,9 @@ package org.v4dris.math.vector;
 import org.v4dris.math.matrix.Matrix;
 import org.v4dris.math.point.Point;
 
+import java.util.Arrays;
+import java.util.stream.IntStream;
+
 public class Vector {
     protected double[] values;
     protected Point startPoint;
@@ -41,6 +44,15 @@ public class Vector {
         for(int i = 0; i < v.length; i++){
             values[i] = v[i];
         }
+    }
+    public void multiply(Matrix matrixIn) {
+        double[][]matrix = matrixIn.values;
+        double[] result = Arrays.stream(matrix)
+                .mapToDouble(row -> IntStream.range(0, row.length)
+                        .mapToDouble(col -> row[col] * values[col])
+                        .sum())
+                .toArray();
+        this.values = result;
     }
 
     public void div(Vector vector) throws Exception {

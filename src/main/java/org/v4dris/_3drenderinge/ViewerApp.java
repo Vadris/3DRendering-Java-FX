@@ -60,9 +60,9 @@ public class ViewerApp extends Application {
         Cube cube = new Cube(100);
         Group root = FXConverter.bodyToGroup(cube);
         Matrix rot = new Matrix(
-                new double[]{1, 0, 0},
-                new double[]{0, Math.sin(0.02), -Math.cos(0.02)},
-                new double[]{0, Math.cos(0.02), Math.sin(0.02)}
+                new double[]{Math.cos(0.02), -Math.sin(0.02), 0},
+                new double[]{Math.sin(0.02), Math.cos(0.02) ,0 },
+                new double[]{0, 0, 1}
         );
         /**
         Thread t = new Thread(() -> {
@@ -82,6 +82,10 @@ public class ViewerApp extends Application {
 
             //Thread.sleep(10000);
             try {
+                cube.transform(rot);
+                cube.transform(rot);
+                cube.transform(rot);
+                cube.transform(rot);
                 cube.transform(rot);
             } catch (Exception e) {
                 throw new RuntimeException(e);

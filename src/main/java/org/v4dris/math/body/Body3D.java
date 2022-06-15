@@ -12,7 +12,7 @@ public class Body3D {
 
     public void transform(Matrix matrix) throws Exception {
         for(int i = 0; i < vectors.length; i++){
-            vectors[i].mul(matrix);
+            vectors[i].multiply(matrix);
         }
     }
 }

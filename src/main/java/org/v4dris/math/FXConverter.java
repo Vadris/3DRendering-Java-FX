@@ -33,9 +33,20 @@ public class FXConverter {
 
     public static Point2D convertPoint(Point3D point){
         double rt = 2 * Math.sqrt(2);
+        Point2D result = new Point2D(point.getX() + point.getY() / rt, point.getZ() - point.getY() / rt);
+        result = convertPixelLocation(result);
+        return result;
+    }
+    public static Point2D convertPixelLocation(Point2D point){
         Rectangle2D screenBounds = Screen.getPrimary().getBounds();
         double offsetX = screenBounds.getMaxX()/2;
         double offsetY = screenBounds.getMaxY()/2;
-        return new Point2D(point.getX() + point.getY()/rt + offsetX,  point.getZ() + point.getY()/rt + offsetY);
+
+
+
+        Point2D result = new Point2D(0,0);
+        result.setX(point.getX() + offsetX);
+        result.setY(offsetY - point.getY());
+        return result;
     }
 }

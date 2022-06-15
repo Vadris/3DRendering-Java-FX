@@ -21,7 +21,7 @@ public class Point2D extends Point {
     public void setX(double x){
         coordinates[0] = x;
     }
-    public void getY(double y){
+    public void setY(double y){
         coordinates[1] = y;
     }
 }
