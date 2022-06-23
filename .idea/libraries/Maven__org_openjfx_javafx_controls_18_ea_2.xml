@@ -2,7 +2,6 @@
   <library name="Maven: org.openjfx:javafx-controls:18-ea+2">
     <CLASSES>
       <root url="jar://$MAVEN_REPOSITORY$/org/openjfx/javafx-controls/18-ea+2/javafx-controls-18-ea+2.jar!/" />
-      <root url="jar://$PROJECT_DIR$/../../JavaLibs/javafx-sdk-18.0.1/lib/javafx.controls.jar!/" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$MAVEN_REPOSITORY$/org/openjfx/javafx-controls/18-ea+2/javafx-controls-18-ea+2-javadoc.jar!/" />

@@ -1,5 +1,7 @@
 package org.v4dris.math.point;
 
+import org.v4dris.math.matrix.Matrix;
+
 public class Point {
     protected double[] coordinates;
     private String name;
@@ -19,6 +21,17 @@ public class Point {
         result += String.valueOf(coordinates[i]);
         result += ")";
         return result;
+    }
+    public void mul(Matrix matrix){
+        double[] v = new double[this.coordinates.length];
+        for(int i = 0; i < matrix.getSizeA(); i++){
+            for(int j = 0; j < matrix.getSizeB(); j++){
+                v[i] += this.coordinates[j] * matrix.values[i][j];
+            }
+        }
+        for(int i = 0; i < v.length; i++){
+            coordinates[i] = v[i];
+        }
     }
 
     public String getName() {
