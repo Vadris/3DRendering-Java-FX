@@ -45,11 +45,6 @@ public class Vector {
             values[i] = v[i];
         }
     }
-    public void rotate(Matrix matrix) throws Exception{
-        this.mul(matrix);
-        this.startPoint.mul(matrix);
-
-    }
     public void multiply(Matrix matrixIn) {
         double[][]matrix = matrixIn.values;
         double[] result = Arrays.stream(matrix)
