@@ -76,8 +76,6 @@ public class Vector {
     public Point getStartPoint() {
         return startPoint;
     }
-
-
     public void setStartPoint(Point startPoint){
         this.startPoint = startPoint;
     }
