@@ -115,7 +115,7 @@ public class ViewerApp extends Application {
             @Override
             protected Void call() throws Exception {
                 while(runAnimation){
-                    Thread.sleep(50);
+                    Thread.sleep(25);
                     for(int i = 0; i < listeners.size(); i++){
                         listeners.get(i).onTickEvent();
                     }
