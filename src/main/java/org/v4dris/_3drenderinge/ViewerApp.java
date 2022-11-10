@@ -6,7 +6,6 @@ import javafx.geometry.Rectangle2D;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Line;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
@@ -14,15 +13,10 @@ import org.v4dris.TickEventListener;
 import org.v4dris.math.FXConverter;
 import org.v4dris.math.body.Cube;
 import org.v4dris.math.matrix.Matrix;
-import org.v4dris.math.point.Point;
-import org.v4dris.math.point.Point2D;
-import org.v4dris.math.point.Point3D;
-import org.v4dris.math.vector.Vector3D;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicReference;
 
 public class ViewerApp extends Application {
 

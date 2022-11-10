@@ -1,7 +1,6 @@
 package org.v4dris.math;
 
 import javafx.geometry.Rectangle2D;
-import javafx.scene.Group;
 import javafx.scene.shape.Line;
 import javafx.stage.Screen;
 import org.v4dris.math.body.Body3D;

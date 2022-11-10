@@ -1,6 +1,5 @@
 package org.v4dris.math.vector;
 
-import org.v4dris.math.point.Point;
 import org.v4dris.math.point.Point2D;
 import org.v4dris.math.point.Point3D;
 

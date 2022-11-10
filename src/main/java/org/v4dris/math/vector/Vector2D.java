@@ -1,6 +1,5 @@
 package org.v4dris.math.vector;
 
-import org.v4dris.math.point.Point;
 import org.v4dris.math.point.Point2D;
 
 public class Vector2D extends Vector {
