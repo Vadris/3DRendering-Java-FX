@@ -4,18 +4,21 @@ import org.v4dris.math.point.Point3D;
 import org.v4dris.math.vector.Vector3D;
 
 public class Cube extends Body3D{
+    private double size;
 
     public Cube(double size) {
         super(null);
-        Point3D a = new Point3D(0,0,0);
-        Point3D b = new Point3D(size,0,0);
-        Point3D c = new Point3D(size,size,0);
-        Point3D d = new Point3D(0,size,0);
+        this.size = size;
+        double zr = -size/2;
+        Point3D a = new Point3D(zr,zr,zr);
+        Point3D b = new Point3D(size/2,zr,zr);
+        Point3D c = new Point3D(size/2,size/2,zr);
+        Point3D d = new Point3D(zr,size/2,zr);
 
-        Point3D e = new Point3D(0,0,size);
-        Point3D f = new Point3D(size,0,size);
-        Point3D g = new Point3D(size,size,size);
-        Point3D h = new Point3D(0, size, size);
+        Point3D e = new Point3D(zr,zr,size/2);
+        Point3D f = new Point3D(size/2,zr,size/2);
+        Point3D g = new Point3D(size/2,size/2,size/2);
+        Point3D h = new Point3D(zr, size/2, size/2);
 
         this.vectors = new Vector3D[]{
                 new Vector3D(a, b),

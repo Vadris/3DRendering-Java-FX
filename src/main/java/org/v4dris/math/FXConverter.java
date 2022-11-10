@@ -14,8 +14,8 @@ public class FXConverter {
         Line line = new Line();
 
         Point3D tempPoint = (Point3D) vector.getStartPoint();
-        Point2D pointA = Point.convertPoint(tempPoint, screenBounds.getMaxX()/2, screenBounds.getMaxY()/2);
-        Point2D pointB = Point.convertPoint(vector.getEndPoint(), screenBounds.getMaxX()/2, screenBounds.getMaxY()/2);
+        Point2D pointA = convertPoint(tempPoint);
+        Point2D pointB = convertPoint(vector.getEndPoint());
         line.setStartX(pointA.getX());
         line.setStartY(pointA.getY());
         line.setEndX(pointB.getX());
@@ -23,12 +23,25 @@ public class FXConverter {
         return line;
     }
 
-    public static Group bodyToGroup(Body3D body){
-        Group group = new Group();
+    public static Line[] bodyToLines(Body3D body){
+        Line[] lines = new Line[body.vectors.length];
         for(int i = 0; i < body.vectors.length; i++){
-            group.getChildren().add(vectorToLine(body.vectors[i]));
+            lines[i] = vectorToLine(body.vectors[i]);
         }
-        return group;
+        return lines;
+    }
+
+    public static Line[] updateLines(Line[] lines, Body3D body){
+        Rectangle2D screenBounds = Screen.getPrimary().getBounds();
+        for(int i = 0; i < lines.length; i++){
+            Point2D pointA = convertPoint((Point3D) body.vectors[i].getStartPoint());
+            Point2D pointB = convertPoint(body.vectors[i].getEndPoint());
+            lines[i].setStartX(pointA.getX());
+            lines[i].setStartY(pointA.getY());
+            lines[i].setEndX(pointB.getX());
+            lines[i].setEndY(pointB.getY());
+        }
+        return lines;
     }
 
     public static Point2D convertPoint(Point3D point){
@@ -41,8 +54,6 @@ public class FXConverter {
         Rectangle2D screenBounds = Screen.getPrimary().getBounds();
         double offsetX = screenBounds.getMaxX()/2;
         double offsetY = screenBounds.getMaxY()/2;
-
-
 
         Point2D result = new Point2D(0,0);
         result.setX(point.getX() + offsetX);

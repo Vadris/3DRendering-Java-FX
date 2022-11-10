@@ -1,5 +1,8 @@
 package org.v4dris.math.matrix;
 
+import java.util.Arrays;
+import java.util.stream.IntStream;
+
 public class Matrix {
     public double[][] values;
 

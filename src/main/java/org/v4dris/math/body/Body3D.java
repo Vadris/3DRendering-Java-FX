@@ -12,7 +12,8 @@ public class Body3D {
 
     public void transform(Matrix matrix) throws Exception {
         for(int i = 0; i < vectors.length; i++){
-            vectors[i].rotate(matrix);
+            vectors[i].multiply(matrix);
+            vectors[i].getStartPoint().multiply(matrix);
         }
     }
 }

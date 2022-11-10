@@ -1,12 +1,16 @@
 package org.v4dris._3drenderinge;
 
 import javafx.application.Application;
+import javafx.concurrent.Task;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyCode;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Line;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import org.v4dris.TickEventListener;
 import org.v4dris.math.FXConverter;
 import org.v4dris.math.body.Cube;
 import org.v4dris.math.matrix.Matrix;
@@ -16,100 +20,126 @@ import org.v4dris.math.point.Point3D;
 import org.v4dris.math.vector.Vector3D;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class ViewerApp extends Application {
+
+    Line[] bodyLines;
+    double phi = 0.1;
+
+    Matrix rot = new Matrix(
+            new double[]{Math.cos(phi), -Math.sin(phi), 0},
+            new double[]{Math.sin(phi), Math.cos(phi) ,0 },
+            new double[]{0, 0, 1}
+    );
+
+    /**
+     Matrix rot = new Matrix(
+            new double[]{1,0,0},
+            new double[]{0,Math.cos(phi), -Math.sin(phi)},
+            new double[]{0, Math.sin(phi), Math.cos(phi)}
+     );
+     **/
+    /**
+    Matrix rot = new Matrix(
+            new double[]{Math.cos(phi), 0, Math.sin(phi)},
+            new double[]{0,1,0},
+            new double[]{-Math.sin(phi), 0, Math.cos(phi)}
+    );
+     **/
+    boolean runAnimation = true;
     @Override
     public void start(Stage stage) throws IOException, InterruptedException {
 
         Rectangle2D screenBounds = Screen.getPrimary().getBounds();
-        /**
-        double size = 100;
-
-        Point3D p1 = new Point3D(0,0,0);
-        Point3D p2 = new Point3D(size,0,0);
-        Point3D p3 = new Point3D(size,size,0);
-        Point3D p4 = new Point3D(0,size,0);
-
-        Point3D p5 = new Point3D(0,0, -size);
-        Point3D p6 = new Point3D(size,0, -size);
-        Point3D p7 = new Point3D(size,size, -size);
-        Point3D p8 = new Point3D(0, size,-size);
 
 
-
-        Group root = new Group(createLine(
-                new Vector3D(p1, p2)),
-                createLine(new Vector3D(p2, p3)),
-                createLine(new Vector3D(p3, p4)),
-                createLine(new Vector3D(p4,p1)),
-
-                createLine(new Vector3D(p1, p5)),
-                createLine(new Vector3D(p2, p6)),
-                createLine(new Vector3D(p3, p7)),
-                createLine(new Vector3D(p4, p8)),
-
-                createLine(new Vector3D(p5, p6)),
-                createLine(new Vector3D(p6, p7)),
-                createLine(new Vector3D(p7,p8)),
-                createLine(new Vector3D(p8,p5))
+        Matrix t1 = new Matrix(
+                new double[]{1,0,-20},
+                new double[]{0,1,-20},
+                new double[]{0,0,1}
+        );
+        Matrix t2 = new Matrix(
+                new double[]{1,0,20},
+                new double[]{0,1,20},
+                new double[]{0,0,1}
         );
 
-        **/
+
 
         Cube cube = new Cube(100);
-        Group root = FXConverter.bodyToGroup(cube);
-        double phi = -12 / (2*Math.PI);
-        Matrix rot = new Matrix(
-                new double[]{Math.cos(phi), -Math.sin(phi), 0},
-                new double[]{Math.sin(phi), Math.cos(phi) ,0 },
-                new double[]{0, 0, 1}
-        );
-        /**
-        Thread t = new Thread(() -> {
-            try {
-                cube.transform(rot);
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
-            root.set(FXConverter.bodyToGroup(cube));
-        });
-        **/
+
+        bodyLines = FXConverter.bodyToLines(cube);
+
+        Group root = new Group();
+        for(int i = 0; i < bodyLines.length; i++){
+            root.getChildren().add(bodyLines[i]);
+        }
         Scene scene = new Scene(root, screenBounds.getMaxX(), screenBounds.getMaxY() - 72);
+
+        scene.setOnKeyPressed(e -> {
+            if (e.getCode() == KeyCode.W){
+                phi += 0.01;
+                rot = new Matrix(
+                        new double[]{Math.cos(phi), -Math.sin(phi), 0},
+                        new double[]{Math.sin(phi), Math.cos(phi) ,0 },
+                        new double[]{0, 0, 1}
+                );
+            }
+            if (e.getCode() == KeyCode.S){
+                phi -= 0.01;
+                rot = new Matrix(
+                        new double[]{Math.cos(phi), -Math.sin(phi), 0},
+                        new double[]{Math.sin(phi), Math.cos(phi) ,0 },
+                        new double[]{0, 0, 1}
+                );
+            }
+            if(e.getCode() == KeyCode.SPACE && runAnimation == false){
+                runAnimation = true;
+            }
+
+            if(e.getCode() == KeyCode.SPACE && runAnimation == true){
+                runAnimation = false;
+            }
+
+        });
+
         stage.setScene(scene);
-        stage.setFullScreen(true);
+        //stage.setFullScreen(true);
         stage.show();
 
-
-            //Thread.sleep(10000);
+        List<TickEventListener> listeners = new ArrayList<>();
+        Task<Void> tick = new Task<Void>() {
+            @Override
+            protected Void call() throws Exception {
+                while(runAnimation){
+                    Thread.sleep(50);
+                    for(int i = 0; i < listeners.size(); i++){
+                        listeners.get(i).onTickEvent();
+                    }
+                }
+                return null;
+            }
+        };
+        listeners.add(() -> {
             try {
-                Thread.sleep(100);
+                //cube.transform(t1);
                 cube.transform(rot);
+                //cube.transform(t2);
 
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
-            root = FXConverter.bodyToGroup(cube);
-
-            stage.getScene().setRoot(root);
-
+            FXConverter.updateLines(bodyLines, cube);
+        });
+        Thread th = new Thread(tick);
+        th.setDaemon(true);
+        th.start();
+        System.out.println("Test");
 
     }
-
-    public Line createLine(Vector3D vector){
-        Rectangle2D screenBounds = Screen.getPrimary().getBounds();
-        Line line = new Line();
-
-        Point3D tempPoint = (Point3D) vector.getStartPoint();
-        Point2D pointA = Point.convertPoint(tempPoint, screenBounds.getMaxX()/2, screenBounds.getMaxY()/2);
-        Point2D pointB = Point.convertPoint(vector.getEndPoint(), screenBounds.getMaxX()/2, screenBounds.getMaxY()/2);
-        line.setStartX(pointA.getX());
-        line.setStartY(pointA.getY());
-        line.setEndX(pointB.getX());
-        line.setEndY(pointB.getY());
-        return line;
-    }
-
     public static void main(String[] args) {
         launch();
     }

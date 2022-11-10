@@ -2,6 +2,9 @@ package org.v4dris.math.point;
 
 import org.v4dris.math.matrix.Matrix;
 
+import java.util.Arrays;
+import java.util.stream.IntStream;
+
 public class Point {
     protected double[] coordinates;
     private String name;
@@ -22,16 +25,14 @@ public class Point {
         result += ")";
         return result;
     }
-    public void mul(Matrix matrix){
-        double[] v = new double[this.coordinates.length];
-        for(int i = 0; i < matrix.getSizeA(); i++){
-            for(int j = 0; j < matrix.getSizeB(); j++){
-                v[i] += this.coordinates[j] * matrix.values[i][j];
-            }
-        }
-        for(int i = 0; i < v.length; i++){
-            coordinates[i] = v[i];
-        }
+    public void multiply(Matrix matrixIn){
+        double[][]matrix = matrixIn.values;
+        double[] result = Arrays.stream(matrix)
+                .mapToDouble(row -> IntStream.range(0, row.length)
+                        .mapToDouble(col -> row[col] * coordinates[col])
+                        .sum())
+                .toArray();
+        this.coordinates = result;
     }
 
     public String getName() {
@@ -39,10 +40,5 @@ public class Point {
     }
     public void setName(String name) {
         this.name = name;
-    }
-
-    public static Point2D convertPoint(Point3D point, double offsetX, double offsetY){
-        double rt = 2 * Math.sqrt(2);
-        return new Point2D(point.getX() + point.getY()/rt + offsetX, point.getZ() - point.getY()/rt + offsetY);
     }
 }
